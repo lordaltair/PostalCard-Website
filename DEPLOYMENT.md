@@ -1,12 +1,12 @@
-# Deployment Guide for Postal Card Project (Ubuntu VPS)
+# Deployment Guide for Postal Card Project (Ubuntu VPS - IP Address Only)
 
-This guide walks you through deploying the Postal Card application (PERN Stack: PostgreSQL, Express, React, Node.js) to an Ubuntu server.
+This guide walks you through deploying the Postal Card application to an Ubuntu server **without a domain name**, using only the VPS IP address.
 
 ## Prerequisites
 
 *   A VPS running Ubuntu 20.04 or 22.04.
 *   Root or sudo access.
-*   A domain name (optional, but recommended).
+*   **Your VPS Public IP Address** (e.g., `192.0.2.123`).
 
 ---
 
@@ -51,6 +51,11 @@ Inside the PostgreSQL shell run the following commands. **Change 'your_password'
 CREATE DATABASE postal_card_db;
 CREATE USER postal_user WITH PASSWORD 'your_secure_password';
 GRANT ALL PRIVILEGES ON DATABASE postal_card_db TO postal_user;
+
+-- Important: Connect to the database and grant schema permissions (Required for Postgres 15+)
+\c postal_card_db
+GRANT ALL ON SCHEMA public TO postal_user;
+
 \q
 ```
 
@@ -58,16 +63,8 @@ GRANT ALL PRIVILEGES ON DATABASE postal_card_db TO postal_user;
 
 ## Step 3: Project Setup
 
-Navigate to your web directory (or home directory) and clone your project. Since your project is local, you might need to upload it using SCP, FTP, or push to GitHub first.
+Clone your project from git (e.g., GitHub, GitLab).
 
-Assuming your project is at `~/postal-card`:
-
-```bash
-mkdir -p ~/postal-card
-# ... Upload your files here ...
-```
-
-Or clone from git:
 ```bash
 git clone <your-repo-url> ~/postal-card
 cd ~/postal-card
@@ -92,7 +89,8 @@ cd ~/postal-card
     ```bash
     cp .env.example .env  # or nano .env
     ```
-    Update the content:
+    Update the content. **Replace `YOUR_SERVER_IP` with your actual IP address.**
+    
     ```env
     PORT=5000
     DB_NAME=postal_card_db
@@ -100,7 +98,9 @@ cd ~/postal-card
     DB_PASS=your_secure_password
     DB_HOST=localhost
     JWT_SECRET=your_long_random_secret_string
-    FRONTEND_URL=https://your-domain.com
+    
+    # IMPORTANT: Use your IP address here
+    FRONTEND_URL=http://YOUR_SERVER_IP
     ```
 
 4.  **Start the Server with PM2:**
@@ -125,29 +125,28 @@ cd ~/postal-card
     ```
 
 3.  **Build the Project:**
-    **Important:** Since Vite is static, it needs to know the API URL at build time.
+    **Important:** Set the API URL to your server's IP address.
+    
     ```bash
-    # Create production env file (or just pass inline)
-    echo "VITE_API_BASE_URL=https://your-domain.com/api" > .env.production
+    # Create production env file
+    # Replace YOUR_SERVER_IP
+    echo "VITE_API_BASE_URL=http://YOUR_SERVER_IP/api" > .env.production
     
     # Build
     npm run build
     ```
 
 4.  **Move Build Files to Web Root:**
-    We'll let Nginx serve these files.
     ```bash
     sudo mkdir -p /var/www/postal-card
     sudo cp -r dist/* /var/www/postal-card/
     ```
-    
-    *Note: If you re-deploy, you'll need to run the build and copy steps again.*
 
 ---
 
 ## Step 6: Nginx Configuration
 
-Configure Nginx to serve the React frontend and proxy API requests to the Node.js backend.
+Configure Nginx to catch all traffic to the IP address.
 
 1.  **Create Config File:**
     ```bash
@@ -155,17 +154,16 @@ Configure Nginx to serve the React frontend and proxy API requests to the Node.j
     ```
 
 2.  **Paste Configuration:**
-    Replace `your-domain.com` with your actual domain or IP address.
-
+    
     ```nginx
     server {
         listen 80;
-        server_name your-domain.com www.your-domain.com;
+        server_name _;  # Catch-all for IP address access
 
         root /var/www/postal-card;
         index index.html;
 
-        # Serve Frontend
+        # Serve Frontend (React Router support)
         location / {
             try_files $uri $uri/ /index.html;
         }
@@ -182,7 +180,7 @@ Configure Nginx to serve the React frontend and proxy API requests to the Node.j
 
         # Serve Uploaded Files
         location /uploads {
-            alias /home/ubuntu/postal-card/server/uploads; # Check this path matches your structure!
+            alias /home/ubuntu/postal-card/server/uploads;
             try_files $uri $uri/ =404;
         }
     }
@@ -190,6 +188,10 @@ Configure Nginx to serve the React frontend and proxy API requests to the Node.j
 
 3.  **Enable Site:**
     ```bash
+    # Remove default site if it exists
+    sudo rm /etc/nginx/sites-enabled/default
+    
+    # Enable our site
     sudo ln -s /etc/nginx/sites-available/postal-card /etc/nginx/sites-enabled/
     sudo nginx -t
     sudo systemctl restart nginx
@@ -197,26 +199,52 @@ Configure Nginx to serve the React frontend and proxy API requests to the Node.j
 
 ---
 
-## Step 7: SSL (HTTPS) - Optional but Recommended
-
-If you have a domain name, secure it with Let's Encrypt.
-
-```bash
-sudo apt install -y certbot python3-certbot-nginx
-sudo certbot --nginx -d your-domain.com -d www.your-domain.com
-```
-
----
-
-## Step 8: Permissions
+## Step 7: Permissions
 
 Ensure your backend can write to the uploads folder.
 
 ```bash
-# Assuming your user is 'ubuntu' and Nginx user is 'www-data'
-# But since Node runs as 'ubuntu', it should be fine.
-# Just ensure the directory exists.
 mkdir -p ~/postal-card/server/uploads
+```
+
+---
+
+## Management & Debugging
+
+### Checking Database (PSQL)
+To inspect your database, tables, and data manually:
+
+1.  **Login to PostgreSQL:**
+    ```bash
+    sudo -u postgres psql
+    ```
+
+2.  **Connect to your Database:**
+    ```sql
+    \c postal_card_db
+    ```
+
+3.  **List all Tables:**
+    ```sql
+    \dt
+    ```
+
+4.  **Query Data (e.g., check users):**
+    ```sql
+    SELECT * FROM "Users";
+    ```
+    *(Note: Quotes around "Users" are often needed in Sequelize because it capitalizes table names)*
+
+5.  **Exit:**
+    ```sql
+    \q
+    ```
+
+### Server Logs
+To check the logs of your backend server:
+
+```bash
+pm2 logs postal-server
 ```
 
 ## Update & Maintenance
