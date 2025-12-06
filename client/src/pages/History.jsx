@@ -25,6 +25,7 @@ const item = {
 };
 
 export default function History() {
+  const uploadBaseUrl = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api').replace('/api', '').replace(/\/$/, '');
   const [files, setFiles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedQr, setSelectedQr] = useState(null);
@@ -172,7 +173,7 @@ export default function History() {
             <div className="flex flex-col items-center">
               <div className="bg-white p-4 rounded-xl border-2 border-gray-100 mb-6">
                 <img 
-                  src={`http://localhost:5000/uploads/${selectedQr.qrCodePath}`} 
+                  src={`${uploadBaseUrl}/uploads/${selectedQr.qrCodePath}`} 
                   alt="QR Code" 
                   className="w-48 h-48 object-contain"
                 />
@@ -184,7 +185,7 @@ export default function History() {
               
               <div className="w-full flex gap-3">
                  <a 
-                   href={`http://localhost:5000/uploads/${selectedQr.qrCodePath}`} 
+                   href={`${uploadBaseUrl}/uploads/${selectedQr.qrCodePath}`} 
                    download
                    className="flex-1"
                  >
