@@ -65,9 +65,9 @@ export default function Dashboard() {
           <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600 leading-tight pb-2">
             سلام، خوش آمدید 👋
           </h1>
-          <p className="text-xl text-gray-500 max-w-2xl mx-auto text-center">
+          {/* <p className="text-xl text-gray-500 max-w-2xl mx-auto text-center">
             امروز می‌خواهید چه کاری انجام دهید؟
-          </p>
+          </p> */}
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-8">
