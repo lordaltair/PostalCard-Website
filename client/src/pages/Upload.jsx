@@ -16,6 +16,7 @@ const steps = [
 ];
 
 export default function Upload() {
+  const uploadBaseUrl = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api').replace('/api', '');
   const [step, setStep] = useState(1);
   const [file, setFile] = useState(null);
   const [uploadedFile, setUploadedFile] = useState(null);
@@ -232,7 +233,7 @@ export default function Upload() {
                  >
                     <div className="bg-white p-4 rounded-xl border-2 border-indigo-100 mb-6 shadow-lg">
                         <img 
-                            src={`http://localhost:5000/uploads/${uploadedFile.qrCodePath}`} 
+                            src={`${uploadBaseUrl}/uploads/${uploadedFile.qrCodePath}`} 
                             alt="QR Code" 
                             className="w-48 h-48 object-contain"
                         />
@@ -245,7 +246,7 @@ export default function Upload() {
 
                     <div className="flex flex-col gap-3 w-full max-w-xs">
                         <a 
-                            href={`http://localhost:5000/uploads/${uploadedFile.qrCodePath}`} 
+                            href={`${uploadBaseUrl}/uploads/${uploadedFile.qrCodePath}`} 
                             download
                             className="w-full"
                         >
