@@ -77,16 +77,44 @@ export default function PublicView() {
               
               <div className="relative aspect-video bg-black flex items-center justify-center group overflow-hidden">
                 {file.mimeType.startsWith('video/') ? (
-                  <video 
-                    ref={mediaRef}
-                    controls
-                    autoPlay
-                    className="w-full h-full object-contain"
-                    src={fileUrl}
-                    poster="/video-placeholder.png"
-                  >
-                    مرورگر شما از پخش ویدیو پشتیبانی نمی‌کند.
-                  </video>
+                  <>
+                    <video 
+                        ref={mediaRef}
+                        className="w-full h-full object-contain"
+                        src={fileUrl}
+                        poster="/video-placeholder.png"
+                        playsInline
+                        onEnded={() => {
+                            if (document.fullscreenElement) {
+                                document.exitFullscreen().catch(err => console.log(err));
+                            }
+                        }}
+                        onPlay={() => {
+                            // Optional: Automatically enter fullscreen on play if desired by user logic,
+                            // specific request was "when it is finished, unset the fullscreen", implying it might be set manually or auto.
+                             if (mediaRef.current && mediaRef.current.requestFullscreen) {
+                                mediaRef.current.requestFullscreen().catch(err => console.log(err));
+                            }
+                        }}
+                    >
+                        مرورگر شما از پخش ویدیو پشتیبانی نمی‌کند.
+                    </video>
+                    {/* Fallback Play Button Overlay if not playing */}
+                     <div 
+                        className="absolute inset-0 flex items-center justify-center bg-black/30 pointer-events-none"
+                        style={{ display: isOpened ? 'none' : 'flex' }}
+                     >
+                         {/* We use a separate state or check strictly if playing. 
+                             Better: Use a button that ACTUALLY triggers play if autoplay failed.
+                         */}
+                     </div>
+                     {/* 
+                        Actually, let's implement the logic: 
+                        1. Try autoPlay in useEffect.
+                        2. If fails (paused), show Big Button.
+                        3. Clicking button -> play() + requestFullscreen()
+                     */}
+                  </>
                 ) : (
                     <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-gray-900 to-black p-12 relative overflow-hidden">
                          {/* Audio Visualizer Effect Placeholder */}
@@ -99,9 +127,34 @@ export default function PublicView() {
                          <div className="z-10 bg-indigo-500/10 p-8 rounded-full mb-8 backdrop-blur-sm border border-indigo-500/20">
                             <Music className="w-16 h-16 text-indigo-400" />
                          </div>
-                        <audio ref={mediaRef} controls autoPlay className="w-full max-w-md z-10" src={fileUrl}>
+                        <audio ref={mediaRef} className="w-full max-w-md z-10" src={fileUrl}>
                             مرورگر شما از پخش صوت پشتیبانی نمی‌کند.
                         </audio>
+                    </div>
+                )}
+                
+                {/* Universal Play Button Overlay for both Video and Audio if not playing */}
+                {!isOpened && (
+                    <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/40 backdrop-blur-sm transition-all duration-300">
+                        <button 
+                            onClick={() => {
+                                if (mediaRef.current) {
+                                    mediaRef.current.play()
+                                        .then(() => {
+                                            setIsOpened(true);
+                                            // Only request fullscreen for video
+                                            if (file.mimeType.startsWith('video/') && mediaRef.current.requestFullscreen) {
+                                                mediaRef.current.requestFullscreen().catch(e => console.log(e));
+                                            }
+                                        })
+                                        .catch(e => console.log("Play failed", e));
+                                }
+                            }}
+                            className="bg-white/20 hover:bg-white/30 text-white rounded-full p-6 backdrop-blur-md border border-white/50 shadow-2xl transform hover:scale-110 transition-all duration-300 group"
+                        >
+                             <PlayCircle className="w-20 h-20 opacity-90 group-hover:opacity-100" />
+                             <span className="sr-only">پخش</span>
+                        </button>
                     </div>
                 )}
               </div>
@@ -137,7 +190,7 @@ export default function PublicView() {
                 <div className="flex justify-center">
                     <p className="text-white/40 text-sm flex items-center">
                         <span className="w-2 h-2 bg-indigo-500 rounded-full ml-2 animate-pulse"></span>
-                        قدرت گرفته از <span className="text-white ml-1 font-bold">  «پستال کارت»  </span>
+                        قدرت گرفته از <span className="text-white ml-1 font-bold">  «شوروم هانه»  </span>
                     </p>
                 </div>
               </div>

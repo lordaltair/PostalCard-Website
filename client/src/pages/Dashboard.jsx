@@ -42,7 +42,7 @@ export default function Dashboard() {
             {/* <div className="w-10 h-10 bg-gradient-to-tr from-indigo-500 to-purple-500 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-indigo-200">
               P
             </div> */}
-            <span className="font-bold text-xl text-gray-900 tracking-tight">پستال کارت</span>
+            <span className="font-bold text-xl text-gray-900 tracking-tight">شوروم هانه</span>
           </div>
           
           <button 
