@@ -18,7 +18,8 @@ export default function PublicView() {
   useEffect(() => {
     const fetchFile = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/public/${publicId}`);
+        const baseUrl = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api').replace(/\/$/, '');
+        const res = await axios.get(`${baseUrl}/public/${publicId}`);
         setFile(res.data);
       } catch (err) {
         setError('این کارت پستی منقضی شده یا حذف شده است.');
@@ -54,7 +55,8 @@ export default function PublicView() {
     </div>
   );
 
-  const fileUrl = `http://localhost:5000/uploads/${file.filePath}`;
+  const uploadBaseUrl = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api').replace('/api', '').replace(/\/$/, '');
+  const fileUrl = `${uploadBaseUrl}/uploads/${file.filePath}`;
 
   return (
     <div className="min-h-screen bg-gray-900 flex flex-col items-center justify-center relative overflow-hidden font-sans">

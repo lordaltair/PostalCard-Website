@@ -176,6 +176,9 @@ Configure Nginx to catch all traffic to the IP address.
             proxy_set_header Connection 'upgrade';
             proxy_set_header Host $host;
             proxy_cache_bypass $http_upgrade;
+            
+            # Allow larger file uploads
+            client_max_body_size 200M;
         }
 
         # Serve Uploaded Files

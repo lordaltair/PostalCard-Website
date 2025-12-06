@@ -93,7 +93,7 @@ export default function Upload() {
       }, 1000);
     } catch (err) {
       console.error(err);
-      setError(err.response?.data?.message || 'آپلود ناموفق بود. لطفاً دوباره تلاش کنید.');
+      setError(err.response?.data?.message || 'آپلود ناموفق بود. لطفاً دوباره تلاش کنید.(اگر به vpn متصل هستید، آن را قطع کنید)');
       setStep(2); // Go back to details
       setUploading(false);
     }

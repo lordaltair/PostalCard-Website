@@ -16,8 +16,7 @@ exports.uploadFile = async (req, res) => {
 
         // Generate QR Code
         // We'll point the QR code to the frontend public view page
-        // Assuming frontend runs on port 5173 by default during dev, or we can use an env var
-        // For now, let's use a placeholder URL that we can configure
+        // Use FRONTEND_URL from env or default to localhost
         const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
         const publicUrl = `${frontendUrl}/v/${publicId}`;
 
