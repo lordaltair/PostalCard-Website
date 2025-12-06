@@ -12,7 +12,7 @@ This guide walks you through deploying the Postal Card application to an Ubuntu 
 
 ## Step 1: Initial Server Setup
 
-Update your system and install necessary packages.
+Update your system and install necessary packages. 
 
 ```bash
 sudo apt update && sudo apt upgrade -y
