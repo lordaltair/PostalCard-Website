@@ -189,7 +189,7 @@ export default function Upload() {
 
                     <Input
                         label="نام کارت (عنوان نمایشی)"
-                        placeholder="مثلاً: تولد مریم ۱۴۰۳"
+                        placeholder="مثلا: تولدت مبارک "
                         value={customName}
                         onChange={(e) => setCustomName(e.target.value)}
                         error={error}
