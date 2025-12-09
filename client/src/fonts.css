@@ -1,40 +1,64 @@
-/* Vazirmatn Font - Local */
+/* Pelak Font - Local */
 @font-face {
-    font-family: 'Vazirmatn';
+    font-family: 'Pelak';
+    font-style: normal;
+    font-weight: 100;
+    font-display: swap;
+    src: url('/fonts/Pelak-Thin.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Pelak';
     font-style: normal;
     font-weight: 300;
     font-display: swap;
-    src: url('/fonts/Vazirmatn-Light.woff2') format('woff2');
+    src: url('/fonts/Pelak-light.woff2') format('woff2');
 }
 
 @font-face {
-    font-family: 'Vazirmatn';
+    font-family: 'Pelak';
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url('/fonts/Vazirmatn-Regular.woff2') format('woff2');
+    src: url('/fonts/Pelak-Regular.woff2') format('woff2');
 }
 
 @font-face {
-    font-family: 'Vazirmatn';
+    font-family: 'Pelak';
     font-style: normal;
     font-weight: 500;
     font-display: swap;
-    src: url('/fonts/Vazirmatn-Medium.woff2') format('woff2');
+    src: url('/fonts/Pelak-Medium.woff2') format('woff2');
 }
 
 @font-face {
-    font-family: 'Vazirmatn';
+    font-family: 'Pelak';
     font-style: normal;
     font-weight: 600;
     font-display: swap;
-    src: url('/fonts/Vazirmatn-SemiBold.woff2') format('woff2');
+    src: url('/fonts/Pelak-SemiBold.woff2') format('woff2');
 }
 
 @font-face {
-    font-family: 'Vazirmatn';
+    font-family: 'Pelak';
     font-style: normal;
     font-weight: 700;
     font-display: swap;
-    src: url('/fonts/Vazirmatn-Bold.woff2') format('woff2');
+    src: url('/fonts/Pelak-Bold.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Pelak';
+    font-style: normal;
+    font-weight: 800;
+    font-display: swap;
+    src: url('/fonts/Pelak-ExtraBold.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Pelak';
+    font-style: normal;
+    font-weight: 900;
+    font-display: swap;
+    src: url('/fonts/Pelak-Black.woff2') format('woff2');
 }
