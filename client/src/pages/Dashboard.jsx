@@ -14,8 +14,8 @@ export default function Dashboard() {
       description: 'یک فایل صوتی یا ویدیویی جدید اضافه کنید',
       icon: Plus,
       path: '/upload',
-      color: 'bg-indigo-600',
-      iconColor: 'text-indigo-100',
+      color: 'bg-gold-600',
+      iconColor: 'text-white',
       delay: 0.1
     },
     {
@@ -23,26 +23,23 @@ export default function Dashboard() {
       description: 'مشاهده و مدیریت فایل‌های قبلی',
       icon: History,
       path: '/history',
-      color: 'bg-purple-600',
-      iconColor: 'text-purple-100',
+      color: 'bg-gold-500',
+      iconColor: 'text-white',
       delay: 0.2
     }
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-20">
+    <div className="min-h-screen bg-gold-50 pb-20">
       {/* Header */}
       <motion.nav 
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        className="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100"
+        className="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-gold-200"
       >
         <div className="max-w-5xl mx-auto px-6 h-20 flex items-center justify-between">
           <div className="flex items-center space-x-3 space-x-reverse">
-            {/* <div className="w-10 h-10 bg-gradient-to-tr from-indigo-500 to-purple-500 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-indigo-200">
-              P
-            </div> */}
-            <span className="font-bold text-xl text-gray-900 tracking-tight">شوروم هانه</span>
+             <img src="/logo.png" alt="Logo" className="h-12 w-auto object-contain" />
           </div>
           
           <button 
@@ -62,7 +59,7 @@ export default function Dashboard() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-16"
         >
-          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600 leading-tight pb-2">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 bg-clip-text text-transparent bg-gradient-to-r from-gold-600 to-gold-800 leading-tight pb-2">
             سلام، خوش آمدید 👋
           </h1>
           {/* <p className="text-xl text-gray-500 max-w-2xl mx-auto text-center">
@@ -73,7 +70,7 @@ export default function Dashboard() {
         <div className="grid md:grid-cols-2 gap-8">
           {menuItems.map((item, index) => (
             <Link to={item.path} key={index} className="block group">
-              <Card className="h-full p-8 transition-all duration-300 hover:border-indigo-200">
+              <Card className="h-full p-8 transition-all duration-300 hover:border-gold-300">
                 <div className="flex flex-col items-center text-center h-full">
                   <motion.div 
                     initial={{ scale: 0 }}
@@ -84,7 +81,7 @@ export default function Dashboard() {
                     <item.icon className={`w-10 h-10 ${item.iconColor}`} />
                   </motion.div>
                   
-                  <h2 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-indigo-600 transition-colors">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-gold-600 transition-colors">
                     {item.title}
                   </h2>
                   <p className="text-gray-500 leading-relaxed">

@@ -58,7 +58,7 @@ export default function History() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
+    <div className="min-h-screen bg-gold-50 p-6">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
@@ -110,7 +110,7 @@ export default function History() {
                   <Card className="h-full flex flex-col">
                     <div className="p-6 flex-1">
                       <div className="flex items-start justify-between mb-4">
-                        <div className={`p-3 rounded-xl ${file.mimeType.startsWith('video') ? 'bg-orange-100 text-orange-600' : 'bg-blue-100 text-blue-600'}`}>
+                        <div className={`p-3 rounded-xl ${file.mimeType.startsWith('video') ? 'bg-gold-100 text-gold-600' : 'bg-gold-50 text-gold-500'}`}>
                           {file.mimeType.startsWith('video') ? <Video className="w-6 h-6" /> : <Music className="w-6 h-6" />}
                         </div>
                         <span className="text-xs text-gray-400 font-mono bg-gray-50 px-2 py-1 rounded-lg">
@@ -135,7 +135,7 @@ export default function History() {
                     <div className="p-4 bg-gray-50 border-t border-gray-100 flex items-center justify-between gap-2">
                        <button
                          onClick={() => setSelectedQr(file)}
-                         className="flex-1 flex items-center justify-center py-2 text-sm font-medium text-gray-700 hover:text-indigo-600 hover:bg-white rounded-lg transition-colors"
+                         className="flex-1 flex items-center justify-center py-2 text-sm font-medium text-gray-700 hover:text-gold-600 hover:bg-white rounded-lg transition-colors"
                        >
                          <QrCode className="w-4 h-4 ml-1" />
                          QR
@@ -144,7 +144,7 @@ export default function History() {
                          href={`/v/${file.publicId}`}
                          target="_blank"
                          rel="noopener noreferrer"
-                         className="flex-1 flex items-center justify-center py-2 text-sm font-medium text-gray-700 hover:text-indigo-600 hover:bg-white rounded-lg transition-colors"
+                         className="flex-1 flex items-center justify-center py-2 text-sm font-medium text-gray-700 hover:text-gold-600 hover:bg-white rounded-lg transition-colors"
                        >
                          <ExternalLink className="w-4 h-4 ml-1" />
                          لینک
@@ -171,7 +171,7 @@ export default function History() {
         >
           {selectedQr && (
             <div className="flex flex-col items-center">
-              <div className="bg-white p-4 rounded-xl border-2 border-gray-100 mb-6">
+              <div className="bg-white p-4 rounded-xl border-2 border-gold-200 mb-6">
                 <img 
                   src={`${uploadBaseUrl}/uploads/${selectedQr.qrCodePath}`} 
                   alt="QR Code" 

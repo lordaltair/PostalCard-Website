@@ -33,7 +33,7 @@ const Loader = ({ size = 'md', className = '' }) => {
         <motion.div
           key={i}
           variants={dot}
-          className="w-3 h-3 bg-indigo-600 rounded-full"
+          className="w-3 h-3 bg-gold-500 rounded-full"
         />
       ))}
     </motion.div>

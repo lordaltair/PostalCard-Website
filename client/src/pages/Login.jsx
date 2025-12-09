@@ -30,8 +30,8 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-gray-50 bg-[url('/grid-pattern.svg')]">
-      <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/50 to-purple-50/50 -z-10" />
+    <div className="min-h-screen flex items-center justify-center p-4 bg-gold-50 bg-[url('/grid-pattern.svg')]">
+      <div className="absolute inset-0 bg-gradient-to-br from-gold-50/50 to-gold-100/50 -z-10" />
       
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
@@ -42,9 +42,9 @@ export default function Login() {
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
-            className="w-20 h-20 bg-indigo-600 rounded-3xl mx-auto mb-6 flex items-center justify-center shadow-xl shadow-indigo-200 transform rotate-3"
+            className="w-32 h-32 mx-auto mb-6 flex items-center justify-center transform rotate-3"
           >
-            <span className="text-4xl">📯</span>
+            <img src="/logo.png" alt="Logo" className="w-full h-full object-contain drop-shadow-xl" />
           </motion.div>
           <h1 className="text-4xl font-bold text-gray-900 mb-2">خوش آمدید 👋</h1>
           <p className="text-gray-500">برای مدیریت کارت‌های پستی وارد شوید</p>
@@ -107,7 +107,7 @@ export default function Login() {
           <div className="mt-8 text-center">
             <p className="text-gray-500">
               حساب کاربری ندارید؟{' '}
-              <Link to="/register" className="text-indigo-600 font-semibold hover:text-indigo-700 transition-colors">
+              <Link to="/register" className="text-gold-600 font-semibold hover:text-gold-700 transition-colors">
                 ثبت نام کنید
               </Link>
             </p>

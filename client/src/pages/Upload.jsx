@@ -105,7 +105,7 @@ export default function Upload() {
         {/* Progress Bar */}
         <div className="bg-gray-100 h-2 w-full">
             <motion.div 
-                className="h-full bg-indigo-600"
+                className="h-full bg-gold-500"
                 initial={{ width: '0%' }}
                 animate={{ width: `${(step / 4) * 100}%` }}
                 transition={{ duration: 0.5 }}
@@ -136,8 +136,8 @@ export default function Upload() {
                     <div
                         className={`w-full border-3 border-dashed rounded-3xl p-12 text-center transition-all duration-300 cursor-pointer mb-6 ${
                         dragActive 
-                            ? 'border-indigo-500 bg-indigo-50 scale-[1.02]' 
-                            : 'border-gray-200 hover:border-indigo-400 hover:bg-gray-50'
+                            ? 'border-gold-500 bg-gold-50 scale-[1.02]' 
+                            : 'border-gold-200 hover:border-gold-400 hover:bg-gold-50'
                         }`}
                         onDragEnter={handleDrag}
                         onDragLeave={handleDrag}
@@ -152,7 +152,7 @@ export default function Upload() {
                            ref={fileInputRef}
                            onChange={(e) => e.target.files[0] && handleFileSelect(e.target.files[0])}
                         />
-                        <div className="w-20 h-20 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <div className="w-20 h-20 bg-gold-100 text-gold-600 rounded-full flex items-center justify-center mx-auto mb-6">
                             <UploadCloud className="w-10 h-10" />
                         </div>
                         <h3 className="text-xl font-bold text-gray-700 mb-2">برای آپلود کلیک کنید</h3>
@@ -176,7 +176,7 @@ export default function Upload() {
                     className="flex-1 flex flex-col"
                  >
                     <div className="flex items-center bg-gray-50 p-4 rounded-xl mb-6">
-                        <div className="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-lg flex items-center justify-center ml-4">
+                        <div className="w-12 h-12 bg-gold-100 text-gold-600 rounded-lg flex items-center justify-center ml-4">
                             {file?.type.startsWith('video') ? <Video /> : <Music />}
                         </div>
                         <div className="flex-1 min-w-0 text-right">
@@ -231,7 +231,7 @@ export default function Upload() {
                     animate={{ opacity: 1, scale: 1 }}
                     className="flex-1 flex flex-col items-center justify-center text-center"
                  >
-                    <div className="bg-white p-4 rounded-xl border-2 border-indigo-100 mb-6 shadow-lg">
+                    <div className="bg-white p-4 rounded-xl border-2 border-gold-200 mb-6 shadow-lg">
                         <img 
                             src={`${uploadBaseUrl}/uploads/${uploadedFile.qrCodePath}`} 
                             alt="QR Code" 

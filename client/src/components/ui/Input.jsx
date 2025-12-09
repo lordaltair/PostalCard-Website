@@ -29,7 +29,7 @@ const Input = ({
             w-full px-4 py-3 bg-white border rounded-xl outline-none transition-all duration-200
             ${error 
               ? 'border-red-300 focus:border-red-500 focus:ring-4 focus:ring-red-100' 
-              : 'border-gray-200 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-50 text-gray-900'
+              : 'border-gold-200 focus:border-gold-500 focus:ring-4 focus:ring-gold-100 text-gray-900'
             }
             ${Icon ? 'pr-12' : ''}
           `}

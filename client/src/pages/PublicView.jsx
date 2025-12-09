@@ -59,11 +59,11 @@ export default function PublicView() {
   const fileUrl = `${uploadBaseUrl}/uploads/${file.filePath}`;
 
   return (
-    <div className="min-h-screen bg-gray-900 flex flex-col items-center justify-center relative overflow-hidden font-sans">
+    <div className="min-h-screen bg-gold-50 flex flex-col items-center justify-center relative overflow-hidden font-sans">
       {/* Ambient background */}
-      <div className="absolute inset-0 opacity-20 pointer-events-none">
-        <div className="absolute top-0 -left-1/4 w-full h-full bg-indigo-600 rounded-full mix-blend-screen filter blur-[128px] opacity-40 animate-blob"></div>
-        <div className="absolute bottom-0 -right-1/4 w-full h-full bg-purple-600 rounded-full mix-blend-screen filter blur-[128px] opacity-40 animate-blob animation-delay-2000"></div>
+      <div className="absolute inset-0 opacity-40 pointer-events-none">
+        <div className="absolute top-0 -left-1/4 w-full h-full bg-gold-300 rounded-full mix-blend-multiply filter blur-[128px] opacity-40 animate-blob"></div>
+        <div className="absolute bottom-0 -right-1/4 w-full h-full bg-gold-500 rounded-full mix-blend-multiply filter blur-[128px] opacity-40 animate-blob animation-delay-2000"></div>
       </div>
 
       <AnimatePresence>
@@ -73,7 +73,7 @@ export default function PublicView() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="z-10 w-full max-w-4xl p-4 md:p-8"
           >
-            <div className="bg-gray-800/50 backdrop-blur-2xl rounded-[2rem] overflow-hidden shadow-2xl border border-white/5 ring-1 ring-white/10">
+            <div className="bg-white/80 backdrop-blur-2xl rounded-[2rem] overflow-hidden shadow-2xl shadow-gold-100 border border-white/40 ring-1 ring-gold-100/20">
               
               <div className="relative aspect-video bg-black flex items-center justify-center group overflow-hidden">
                 {file.mimeType.startsWith('video/') ? (
@@ -88,7 +88,7 @@ export default function PublicView() {
                     مرورگر شما از پخش ویدیو پشتیبانی نمی‌کند.
                   </video>
                 ) : (
-                    <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-gray-900 to-black p-12 relative overflow-hidden">
+                    <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-gold-50 to-white p-12 relative overflow-hidden">
                          {/* Audio Visualizer Effect Placeholder */}
                          <div className="absolute inset-0 flex items-center justify-center opacity-10">
                             {[1,2,3].map(i => (
@@ -96,8 +96,8 @@ export default function PublicView() {
                             ))}
                          </div>
                          
-                         <div className="z-10 bg-indigo-500/10 p-8 rounded-full mb-8 backdrop-blur-sm border border-indigo-500/20">
-                            <Music className="w-16 h-16 text-indigo-400" />
+                         <div className="z-10 bg-gold-50 p-8 rounded-full mb-8 backdrop-blur-sm border border-gold-200">
+                            <Music className="w-16 h-16 text-gold-500" />
                          </div>
                         <audio ref={mediaRef} controls autoPlay className="w-full max-w-md z-10" src={fileUrl}>
                             مرورگر شما از پخش صوت پشتیبانی نمی‌کند.
@@ -109,13 +109,13 @@ export default function PublicView() {
               <div className="p-8 md:p-12">
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
                      <div>
-                        <h1 className="text-3xl md:text-4xl font-bold text-white mb-3">{file.customName}</h1>
-                        <div className="flex items-center text-gray-400 text-sm gap-4">
-                            <span className="flex items-center bg-white/5 px-3 py-1 rounded-full">
+                        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">{file.customName}</h1>
+                        <div className="flex items-center text-gray-600 text-sm gap-4">
+                            <span className="flex items-center bg-gold-100/50 px-3 py-1 rounded-full border border-gold-200/50">
                                 <Calendar className="w-4 h-4 ml-2" />
                                 {formatToJalali(file.createdAt)}
                             </span>
-                            <span className="flex items-center bg-white/5 px-3 py-1 rounded-full uppercase">
+                            <span className="flex items-center bg-gold-100/50 px-3 py-1 rounded-full uppercase border border-gold-200/50">
                                 <FileType className="w-4 h-4 ml-2" />
                                 {file.mimeType.split('/')[1]}
                             </span>
@@ -127,7 +127,7 @@ export default function PublicView() {
                         whileTap={{ scale: 0.95 }}
                         href={fileUrl} 
                         download 
-                        className="flex items-center justify-center px-8 py-4 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold transition-all shadow-lg hover:shadow-indigo-500/40"
+                        className="flex items-center justify-center px-8 py-4 rounded-2xl bg-gold-600 hover:bg-gold-500 text-white font-bold transition-all shadow-lg hover:shadow-gold-500/40"
                     >
                         <Download className="w-5 h-5 ml-2" />
                         دانلود فایل اصلی
@@ -135,9 +135,9 @@ export default function PublicView() {
                 </div>
                 
                 <div className="flex justify-center">
-                    <p className="text-white/40 text-sm flex items-center">
-                        <span className="w-2 h-2 bg-indigo-500 rounded-full ml-2 animate-pulse"></span>
-                        قدرت گرفته از <span className="text-white ml-1 font-bold">  «شوروم هانه»  </span>
+                    <p className="text-gray-400 text-sm flex items-center">
+                        <span className="w-2 h-2 bg-gold-500 rounded-full ml-2 animate-pulse"></span>
+                        قدرت گرفته از <img src="/logo.png" alt="Logo" className="h-10 w-auto mx-2 object-contain" />
                     </p>
                 </div>
               </div>

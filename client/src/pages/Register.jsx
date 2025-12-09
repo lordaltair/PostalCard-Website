@@ -30,8 +30,8 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-gray-50 bg-[url('/grid-pattern.svg')]">
-      <div className="absolute inset-0 bg-gradient-to-tl from-purple-50/50 to-pink-50/50 -z-10" />
+    <div className="min-h-screen flex items-center justify-center p-4 bg-gold-50 bg-[url('/grid-pattern.svg')]">
+      <div className="absolute inset-0 bg-gradient-to-tl from-gold-50/50 to-gold-200/50 -z-10" />
       
       <motion.div 
         initial={{ opacity: 0, scale: 0.95 }}
@@ -43,15 +43,15 @@ export default function Register() {
             initial={{ rotate: -180, scale: 0 }}
             animate={{ rotate: 0, scale: 1 }}
             transition={{ type: "spring", duration: 0.8 }}
-            className="w-20 h-20 bg-purple-600 rounded-full mx-auto mb-6 flex items-center justify-center shadow-xl shadow-purple-200"
+            className="w-32 h-32 mx-auto mb-6 flex items-center justify-center"
           >
-            <Sparkles className="w-10 h-10 text-white" />
+             <img src="/logo.png" alt="Logo" className="w-full h-full object-contain drop-shadow-xl" />
           </motion.div>
           <h1 className="text-4xl font-bold text-gray-900 mb-2">شروع کنید 🚀</h1>
           <p className="text-gray-500">حساب کاربری بسازید و خاطرات را ماندگار کنید</p>
         </div>
 
-        <Card className="p-8 border-t-4 border-t-purple-500">
+        <Card className="p-8 border-t-4 border-t-gold-500">
           <form className="space-y-6" onSubmit={handleSubmit}>
             <Input
               label="شماره موبایل"
@@ -88,7 +88,7 @@ export default function Register() {
             <Button 
               type="submit" 
               variant="primary" 
-              className="w-full bg-purple-600 hover:bg-purple-700 hover:shadow-purple-500/30"
+              className="w-full bg-gold-600 hover:bg-gold-700 hover:shadow-gold-500/30"
               disabled={loading}
             >
               {loading ? (
@@ -103,7 +103,7 @@ export default function Register() {
           <div className="mt-8 text-center">
             <p className="text-gray-500">
               قبلاً ثبت نام کرده‌اید؟{' '}
-              <Link to="/login" className="text-purple-600 font-semibold hover:text-purple-700 transition-colors">
+              <Link to="/login" className="text-gold-600 font-semibold hover:text-gold-700 transition-colors">
                 وارد شوید
               </Link>
             </p>

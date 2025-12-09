@@ -4,6 +4,18 @@
 @theme {
   --font-sans: 'Vazirmatn', sans-serif;
 
+  --color-gold-50: #FFFCF9;
+  --color-gold-100: #FFF9F0;
+  --color-gold-200: #FCEFD5;
+  --color-gold-300: #F3E0B5;
+  --color-gold-400: #EBCE93;
+  --color-gold-500: #DFCBA4;
+  /* Champagne Gold Base */
+  --color-gold-600: #CFB17D;
+  --color-gold-700: #A88B5B;
+  --color-gold-800: #856E49;
+  --color-gold-900: #5C4B30;
+
   --animate-blob: blob 7s infinite;
 
   @keyframes blob {
@@ -26,34 +38,34 @@
 }
 
 :root {
-  --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
-  --glass-bg: rgba(255, 255, 255, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.5);
-  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  --primary-gradient: linear-gradient(135deg, #EBD5A0 0%, #F5E6C8 50%, #EBD5A0 100%);
+  --glass-bg: rgba(255, 255, 255, 0.9);
+  --glass-border: rgba(243, 224, 181, 0.3);
+  --glass-shadow: 0 8px 32px 0 rgba(168, 139, 91, 0.05);
 }
 
 body {
   font-family: 'Vazirmatn', sans-serif !important;
-  @apply bg-gray-50 text-gray-900 overflow-x-hidden;
+  @apply bg-gold-50 text-gray-800 overflow-x-hidden;
   background-image:
-    radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
-    radial-gradient(at 100% 0%, rgba(168, 85, 247, 0.15) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, rgba(236, 72, 153, 0.15) 0px, transparent 50%),
-    radial-gradient(at 0% 100%, rgba(99, 102, 241, 0.15) 0px, transparent 50%);
+    radial-gradient(at 0% 0%, rgba(243, 224, 181, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(235, 206, 147, 0.1) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(252, 239, 213, 0.2) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, rgba(207, 177, 125, 0.05) 0px, transparent 50%);
   background-attachment: fixed;
 }
 
 @layer components {
   .btn-primary {
-    @apply relative overflow-hidden bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white font-medium py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300;
+    @apply relative overflow-hidden bg-gradient-to-r from-gold-500 to-gold-600 text-white font-medium py-3 px-6 rounded-xl shadow-lg shadow-gold-200 hover:shadow-xl hover:shadow-gold-300 transform hover:-translate-y-0.5 transition-all duration-300;
   }
 
   .glass-card {
-    @apply bg-white/70 backdrop-blur-lg border border-white/50 shadow-xl rounded-2xl;
+    @apply bg-white/80 backdrop-blur-lg border border-gold-200 shadow-xl shadow-gold-100 rounded-2xl;
   }
 
   .input-field {
-    @apply block w-full px-4 py-3 bg-white/50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 outline-none backdrop-blur-sm;
+    @apply block w-full px-4 py-3 bg-white/60 border border-gold-200 rounded-xl focus:ring-2 focus:ring-gold-400 focus:border-transparent transition-all duration-200 outline-none backdrop-blur-sm placeholder-gold-300 text-gray-800;
   }
 }
 
