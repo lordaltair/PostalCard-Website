@@ -13,6 +13,7 @@ export default function PublicView() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
   const [isOpened, setIsOpened] = useState(false);
+  const [isVerticalVideo, setIsVerticalVideo] = useState(false);
   const mediaRef = useRef(null);
 
   useEffect(() => {
@@ -38,6 +39,11 @@ export default function PublicView() {
             mediaRef.current.play().catch(e => console.log('Autoplay blocked:', e));
         }
     }, 100);
+  };
+
+  const handleMetadataLoaded = (e) => {
+    const { videoWidth, videoHeight } = e.target;
+    setIsVerticalVideo(videoHeight > videoWidth);
   };
 
   if (loading) return (
@@ -75,12 +81,17 @@ export default function PublicView() {
           >
             <div className="bg-white/80 backdrop-blur-2xl rounded-[2rem] overflow-hidden shadow-2xl shadow-gold-100 border border-white/40 ring-1 ring-gold-100/20">
               
-              <div className="relative aspect-video bg-black flex items-center justify-center group overflow-hidden">
+              <div className={`relative ${
+                file.mimeType.startsWith('video/') 
+                  ? (isVerticalVideo ? 'aspect-[9/16] max-h-[80vh] mx-auto' : 'aspect-video')
+                  : 'aspect-square md:aspect-[16/9]'
+              } bg-black flex items-center justify-center group overflow-hidden transition-all duration-300 ease-in-out`}>
                 {file.mimeType.startsWith('video/') ? (
                   <video 
                     ref={mediaRef}
                     controls
                     autoPlay
+                    onLoadedMetadata={handleMetadataLoaded}
                     className="w-full h-full object-contain"
                     src={fileUrl}
                     poster="/video-placeholder.png"
@@ -88,7 +99,7 @@ export default function PublicView() {
                     مرورگر شما از پخش ویدیو پشتیبانی نمی‌کند.
                   </video>
                 ) : (
-                    <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-gold-50 to-white p-12 relative overflow-hidden">
+                    <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-gold-50 to-white p-6 md:p-12 relative overflow-hidden">
                          {/* Audio Visualizer Effect Placeholder */}
                          <div className="absolute inset-0 flex items-center justify-center opacity-10">
                             {[1,2,3].map(i => (
@@ -96,9 +107,12 @@ export default function PublicView() {
                             ))}
                          </div>
                          
-                         <div className="z-10 bg-gold-50 p-8 rounded-full mb-8 backdrop-blur-sm border border-gold-200">
-                            <Music className="w-16 h-16 text-gold-500" />
+                         <div className="z-10 bg-gold-50 p-4 rounded-full mb-4 md:mb-6 backdrop-blur-sm border border-gold-200">
+                            <Music className="w-12 h-12 md:w-16 md:h-16 text-gold-500" />
                          </div>
+                         <h3 className="text-lg md:text-xl font-bold text-gray-800 mb-4 md:mb-8 z-10 text-center">
+                            پیام صوتی برای شما دوست عزیز
+                         </h3>
                         <audio ref={mediaRef} controls autoPlay className="w-full max-w-md z-10" src={fileUrl}>
                             مرورگر شما از پخش صوت پشتیبانی نمی‌کند.
                         </audio>
