@@ -33,7 +33,7 @@ const item = {
 
 export default function History() {
   const uploadBaseUrl = (
-    "http://188.121.125.218/api" || "http://localhost:5000/api"
+    "http://188.121.125.218/api/" || "http://localhost:5000/api"
   )
     .replace("/api", "")
     .replace(/\/$/, "");

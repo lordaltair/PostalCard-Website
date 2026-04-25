@@ -28,7 +28,7 @@ export default function PublicView() {
     const fetchFile = async () => {
       try {
         const baseUrl = (
-          "http://188.121.125.218/api" || "http://localhost:5000/api"
+          "http://188.121.125.218/api/" || "http://localhost:5000/api"
         ).replace(/\/$/, "");
         const res = await axios.get(`${baseUrl}/public/${publicId}`);
         setFile(res.data);
@@ -76,7 +76,7 @@ export default function PublicView() {
     );
 
   const uploadBaseUrl = (
-    "http://188.121.125.218/api" || "http://localhost:5000/api"
+    "http://188.121.125.218/api/" || "http://localhost:5000/api"
   )
     .replace("/api", "")
     .replace(/\/$/, "");

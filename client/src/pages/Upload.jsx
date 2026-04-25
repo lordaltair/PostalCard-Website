@@ -17,7 +17,7 @@ const steps = [
 
 export default function Upload() {
   const uploadBaseUrl = (
-    "http://188.121.125.218/api" || "http://localhost:5000/api"
+    "http://188.121.125.218/api/" || "http://localhost:5000/api"
   ).replace("/api", "");
   const [step, setStep] = useState(1);
   const [file, setFile] = useState(null);
