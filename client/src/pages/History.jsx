@@ -15,6 +15,7 @@ import Modal from "../components/ui/Modal";
 import Button from "../components/ui/Button";
 import Loader from "../components/ui/Loader";
 import { formatToJalali } from "../utils/date";
+import { getUploadsBase } from "../config/apiBase";
 
 const container = {
   hidden: { opacity: 0 },
@@ -32,11 +33,7 @@ const item = {
 };
 
 export default function History() {
-  const uploadBaseUrl = (
-    "http://188.121.125.218/api/" || "http://localhost:5000/api"
-  )
-    .replace("/api", "")
-    .replace(/\/$/, "");
+  const uploadsBase = getUploadsBase();
   const [files, setFiles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedQr, setSelectedQr] = useState(null);
@@ -200,7 +197,7 @@ export default function History() {
             <div className="flex flex-col items-center">
               <div className="bg-white p-4 rounded-xl border-2 border-gold-200 mb-6">
                 <img
-                  src={`${uploadBaseUrl}/uploads/${selectedQr.qrCodePath}`}
+                  src={`${uploadsBase}/uploads/${selectedQr.qrCodePath}`}
                   alt="QR Code"
                   className="w-48 h-48 object-contain"
                 />
@@ -214,7 +211,7 @@ export default function History() {
 
               <div className="w-full flex gap-3">
                 <a
-                  href={`${uploadBaseUrl}/uploads/${selectedQr.qrCodePath}`}
+                  href={`${uploadsBase}/uploads/${selectedQr.qrCodePath}`}
                   download
                   className="flex-1"
                 >

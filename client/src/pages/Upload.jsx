@@ -7,6 +7,7 @@ import Card from "../components/ui/Card";
 import Button from "../components/ui/Button";
 import Input from "../components/ui/Input";
 import Loader from "../components/ui/Loader";
+import { getUploadsBase } from "../config/apiBase";
 
 const steps = [
   { id: 1, title: "انتخاب فایل" },
@@ -16,9 +17,7 @@ const steps = [
 ];
 
 export default function Upload() {
-  const uploadBaseUrl = (
-    "http://188.121.125.218/api/" || "http://localhost:5000/api"
-  ).replace("/api", "");
+  const uploadsBase = getUploadsBase();
   const [step, setStep] = useState(1);
   const [file, setFile] = useState(null);
   const [uploadedFile, setUploadedFile] = useState(null);
@@ -266,7 +265,7 @@ export default function Upload() {
               >
                 <div className="bg-white p-4 rounded-xl border-2 border-gold-200 mb-6 shadow-lg">
                   <img
-                    src={`${uploadBaseUrl}/uploads/${uploadedFile.qrCodePath}`}
+                    src={`${uploadsBase}/uploads/${uploadedFile.qrCodePath}`}
                     alt="QR Code"
                     className="w-48 h-48 object-contain"
                   />
@@ -282,7 +281,7 @@ export default function Upload() {
 
                 <div className="flex flex-col gap-3 w-full max-w-xs">
                   <a
-                    href={`${uploadBaseUrl}/uploads/${uploadedFile.qrCodePath}`}
+                    href={`${uploadsBase}/uploads/${uploadedFile.qrCodePath}`}
                     download
                     className="w-full"
                   >

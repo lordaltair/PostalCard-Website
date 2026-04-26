@@ -14,6 +14,7 @@ import {
 import Loader from "../components/ui/Loader";
 import { formatToJalali } from "../utils/date";
 import Button from "../components/ui/Button";
+import { API_BASE, getUploadsBase } from "../config/apiBase";
 
 export default function PublicView() {
   const { publicId } = useParams();
@@ -27,10 +28,7 @@ export default function PublicView() {
   useEffect(() => {
     const fetchFile = async () => {
       try {
-        const baseUrl = (
-          "http://188.121.125.218/api/" || "http://localhost:5000/api"
-        ).replace(/\/$/, "");
-        const res = await axios.get(`${baseUrl}/public/${publicId}`);
+        const res = await axios.get(`${API_BASE}/public/${publicId}`);
         setFile(res.data);
       } catch (err) {
         setError("این کارت پستی منقضی شده یا حذف شده است.");
@@ -75,12 +73,8 @@ export default function PublicView() {
       </div>
     );
 
-  const uploadBaseUrl = (
-    "http://188.121.125.218/api/" || "http://localhost:5000/api"
-  )
-    .replace("/api", "")
-    .replace(/\/$/, "");
-  const fileUrl = `${uploadBaseUrl}/uploads/${file.filePath}`;
+  const uploadsBase = getUploadsBase();
+  const fileUrl = `${uploadsBase}/uploads/${file.filePath}`;
 
   return (
     <div className="min-h-screen bg-gold-50 flex flex-col items-center justify-center relative overflow-hidden font-sans">
