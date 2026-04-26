@@ -205,10 +205,10 @@ export default function History() {
                   className="w-48 h-48 object-contain"
                 />
               </div>
-              <h3 className="font-bold text-lg mb-2">
+              <h3 className="font-bold text-lg pb-4 mb-2">
                 {selectedQr.customName}
               </h3>
-              <p className="text-gray-500 text-sm mb-6 text-center">
+              <p className="text-gray-500 text-sm mb-6 pb-6 text-center">
                 برای مشاهده فایل اسکن کنید یا از لینک زیر استفاده کنید
               </p>
 

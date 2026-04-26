@@ -1,29 +1,29 @@
-import { useState } from 'react';
-import { useAuth } from '../context/AuthContext';
-import { useNavigate, Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { Phone, Lock, Sparkles, Loader2 } from 'lucide-react';
-import Button from '../components/ui/Button';
-import Input from '../components/ui/Input';
-import Card from '../components/ui/Card';
+import { useState } from "react";
+import { useAuth } from "../context/AuthContext";
+import { useNavigate, Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { Phone, Lock, Sparkles, Loader2 } from "lucide-react";
+import Button from "../components/ui/Button";
+import Input from "../components/ui/Input";
+import Card from "../components/ui/Card";
 
 export default function Register() {
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const { register } = useAuth();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
+    setError("");
     setLoading(true);
     try {
       await register(phoneNumber, password);
-      navigate('/');
+      navigate("/");
     } catch (err) {
-      setError(err.response?.data?.message || 'ثبت نام ناموفق بود');
+      setError(err.response?.data?.message || "ثبت نام ناموفق بود");
     } finally {
       setLoading(false);
     }
@@ -32,8 +32,8 @@ export default function Register() {
   return (
     <div className="min-h-screen flex items-center justify-center p-4 bg-gold-50 bg-[url('/grid-pattern.svg')]">
       <div className="absolute inset-0 bg-gradient-to-tl from-gold-50/50 to-gold-200/50 -z-10" />
-      
-      <motion.div 
+
+      <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         className="w-full max-w-md"
@@ -45,10 +45,18 @@ export default function Register() {
             transition={{ type: "spring", duration: 0.8 }}
             className="w-32 h-32 mx-auto mb-6 flex items-center justify-center"
           >
-             <img src="/logo.png" alt="Logo" className="w-full h-full object-contain drop-shadow-xl" />
+            <img
+              src="/logo.png"
+              alt="Logo"
+              className="w-full h-full object-contain drop-shadow-xl"
+            />
           </motion.div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">شروع کنید 🚀</h1>
-          <p className="text-gray-500">حساب کاربری بسازید و خاطرات را ماندگار کنید</p>
+          <h1 className="text-4xl font-bold text-gray-900 mb-2 pb-4">
+            شروع کنید 🚀
+          </h1>
+          <p className="text-gray-500">
+            حساب کاربری بسازید و خاطرات را ماندگار کنید
+          </p>
         </div>
 
         <Card className="p-8 border-t-4 border-t-gold-500">
@@ -63,7 +71,7 @@ export default function Register() {
               className="text-right"
               required
             />
-            
+
             <Input
               label="رمز عبور"
               type="password"
@@ -76,18 +84,18 @@ export default function Register() {
             />
 
             {error && (
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
+                animate={{ opacity: 1, height: "auto" }}
                 className="p-4 bg-red-50 text-red-600 rounded-xl text-sm text-center"
               >
                 {error}
               </motion.div>
             )}
 
-            <Button 
-              type="submit" 
-              variant="primary" 
+            <Button
+              type="submit"
+              variant="primary"
               className="w-full bg-gold-600 hover:bg-gold-700 hover:shadow-gold-500/30"
               disabled={loading}
             >
@@ -96,14 +104,19 @@ export default function Register() {
                   <Loader2 className="w-5 h-5 animate-spin ml-2" />
                   در حال ساخت حساب...
                 </div>
-              ) : 'ثبت نام و شروع'}
+              ) : (
+                "ثبت نام و شروع"
+              )}
             </Button>
           </form>
 
           <div className="mt-8 text-center">
             <p className="text-gray-500">
-              قبلاً ثبت نام کرده‌اید؟{' '}
-              <Link to="/login" className="text-gold-600 font-semibold hover:text-gold-700 transition-colors">
+              قبلاً ثبت نام کرده‌اید؟{" "}
+              <Link
+                to="/login"
+                className="text-gold-600 font-semibold hover:text-gold-700 transition-colors"
+              >
                 وارد شوید
               </Link>
             </p>

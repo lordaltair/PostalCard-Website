@@ -1,29 +1,29 @@
-import { useState } from 'react';
-import { useAuth } from '../context/AuthContext';
-import { useNavigate, Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { Phone, Lock, ArrowRight, Loader2 } from 'lucide-react';
-import Button from '../components/ui/Button';
-import Input from '../components/ui/Input';
-import Card from '../components/ui/Card';
+import { useState } from "react";
+import { useAuth } from "../context/AuthContext";
+import { useNavigate, Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { Phone, Lock, ArrowRight, Loader2 } from "lucide-react";
+import Button from "../components/ui/Button";
+import Input from "../components/ui/Input";
+import Card from "../components/ui/Card";
 
 export default function Login() {
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const { login } = useAuth();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
+    setError("");
     setLoading(true);
     try {
       await login(phoneNumber, password);
-      navigate('/');
+      navigate("/");
     } catch (err) {
-      setError(err.response?.data?.message || 'ورود ناموفق بود');
+      setError(err.response?.data?.message || "ورود ناموفق بود");
     } finally {
       setLoading(false);
     }
@@ -32,8 +32,8 @@ export default function Login() {
   return (
     <div className="min-h-screen flex items-center justify-center p-4 bg-gold-50 bg-[url('/grid-pattern.svg')]">
       <div className="absolute inset-0 bg-gradient-to-br from-gold-50/50 to-gold-100/50 -z-10" />
-      
-      <motion.div 
+
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="w-full max-w-md"
@@ -44,9 +44,15 @@ export default function Login() {
             animate={{ scale: 1 }}
             className="w-32 h-32 mx-auto mb-6 flex items-center justify-center transform rotate-3"
           >
-            <img src="/logo.png" alt="Logo" className="w-full h-full object-contain drop-shadow-xl" />
+            <img
+              src="/logo.png"
+              alt="Logo"
+              className="w-full h-full object-contain drop-shadow-xl"
+            />
           </motion.div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">خوش آمدید 👋</h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-2 pb-4">
+            خوش آمدید 👋
+          </h1>
           <p className="text-gray-500">برای مدیریت کارت‌های پستی وارد شوید</p>
         </div>
 
@@ -62,7 +68,7 @@ export default function Login() {
               className="text-right"
               required
             />
-            
+
             <Input
               label="رمز عبور"
               type="password"
@@ -75,7 +81,7 @@ export default function Login() {
             />
 
             {error && (
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 className="p-4 bg-red-50 text-red-600 rounded-xl text-sm text-center"
@@ -84,9 +90,9 @@ export default function Login() {
               </motion.div>
             )}
 
-            <Button 
-              type="submit" 
-              variant="primary" 
+            <Button
+              type="submit"
+              variant="primary"
               className="w-full"
               disabled={loading}
             >
@@ -106,8 +112,11 @@ export default function Login() {
 
           <div className="mt-8 text-center">
             <p className="text-gray-500">
-              حساب کاربری ندارید؟{' '}
-              <Link to="/register" className="text-gold-600 font-semibold hover:text-gold-700 transition-colors">
+              حساب کاربری ندارید؟{" "}
+              <Link
+                to="/register"
+                className="text-gold-600 font-semibold hover:text-gold-700 transition-colors"
+              >
                 ثبت نام کنید
               </Link>
             </p>

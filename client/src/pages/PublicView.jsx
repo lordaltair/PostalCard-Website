@@ -139,7 +139,7 @@ export default function PublicView() {
                   <div className="z-10 bg-gold-50 p-4 rounded-full mb-4 md:mb-6 backdrop-blur-sm border border-gold-200">
                     <Music className="w-12 h-12 md:w-16 md:h-16 text-gold-500" />
                   </div>
-                  <h3 className="text-lg md:text-xl font-bold text-gray-800 mb-4 md:mb-8 z-10 text-center">
+                  <h3 className="text-lg md:text-xl font-bold text-gray-800 mb-4 md:mb-8 z-10 pb-8 text-center">
                     پیام صوتی برای شما دوست عزیز
                   </h3>
                   <audio
@@ -158,7 +158,7 @@ export default function PublicView() {
             <div className="p-8 md:p-12">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
                 <div>
-                  <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+                  <h1 className="text-3xl md:text-4xl pb-4 font-bold text-gray-900 mb-3">
                     {file.customName}
                   </h1>
                   <div className="flex items-center text-gray-600 text-sm gap-4">

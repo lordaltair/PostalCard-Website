@@ -1,5 +1,5 @@
-import { createContext, useState, useEffect, useContext } from 'react';
-import api from '../api/axios';
+import { createContext, useState, useEffect, useContext } from "react";
+import api from "../api/axios";
 
 const AuthContext = createContext();
 
@@ -9,9 +9,9 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const checkAuth = async () => {
-      const token = localStorage.getItem('token');
-      const storedUser = localStorage.getItem('user');
-      
+      const token = localStorage.getItem("token");
+      const storedUser = localStorage.getItem("user");
+
       if (token && storedUser) {
         setUser(JSON.parse(storedUser));
       }
@@ -21,24 +21,24 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = async (phoneNumber, password) => {
-    const res = await api.post('/auth/login', { phoneNumber, password });
-    localStorage.setItem('token', res.data.token);
-    localStorage.setItem('user', JSON.stringify(res.data.user));
+    const res = await api.post("/auth/login", { phoneNumber, password });
+    localStorage.setItem("token", res.data.token);
+    localStorage.setItem("user", JSON.stringify(res.data.user));
     setUser(res.data.user);
     return res.data;
   };
 
   const register = async (phoneNumber, password) => {
-    const res = await api.post('/auth/register', { phoneNumber, password });
-    localStorage.setItem('token', res.data.token);
-    localStorage.setItem('user', JSON.stringify(res.data.user));
+    const res = await api.post("/auth/register", { phoneNumber, password });
+    localStorage.setItem("token", res.data.token);
+    localStorage.setItem("user", JSON.stringify(res.data.user));
     setUser(res.data.user);
     return res.data;
   };
 
   const logout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
     setUser(null);
   };
 
