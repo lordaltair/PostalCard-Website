@@ -28,7 +28,7 @@ export default function PublicView() {
   useEffect(() => {
     const fetchFile = async () => {
       try {
-        const res = await axios.get(`${API_BASE}/public/${publicId}`);
+        const res = await axios.get(`${API_BASE}public/${publicId}`);
         setFile(res.data);
       } catch (err) {
         setError("این کارت پستی منقضی شده یا حذف شده است.");
