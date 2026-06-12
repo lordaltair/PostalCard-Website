@@ -1,48 +1,31 @@
-function isLocalHost(hostname) {
-    return !hostname || hostname === 'localhost' || hostname === '127.0.0.1';
-}
+const path = require('path');
 
-function originFromHeader(value) {
-    if (!value) return null;
+require('dotenv').config({ path: path.join(__dirname, '../.env') });
 
-    try {
-        const url = new URL(value);
-        if (isLocalHost(url.hostname)) return null;
-        return `${url.protocol}//${url.host}`;
-    } catch {
-        return null;
-    }
-}
+const DEV_FALLBACK = 'http://localhost:5173';
 
-function getEnvFrontendUrl() {
-    const url = process.env.FRONTEND_URL?.trim();
-    return url ? url.replace(/\/$/, '') : null;
+function normalizeUrl(url) {
+    return url.replace(/\/$/, '');
 }
 
 /**
  * Public site URL for QR codes and share links.
- * Priority: FRONTEND_URL env → Origin/Referer → proxy headers → dev fallback.
+ * Always uses FRONTEND_URL from .env — never request headers (those reflect
+ * where the browser runs, e.g. localhost:5173 during dev).
  */
-function getFrontendUrl(req) {
-    const envUrl = getEnvFrontendUrl();
-    if (envUrl) return envUrl;
-
-    const fromOrigin = originFromHeader(req.get('origin'));
-    if (fromOrigin) return fromOrigin;
-
-    const fromReferer = originFromHeader(req.get('referer'));
-    if (fromReferer) return fromReferer;
-
-    const forwardedHost = req.get('x-forwarded-host');
-    const host = (forwardedHost?.split(',')[0] || req.get('host') || '').trim();
-    const proto = (req.get('x-forwarded-proto') || req.protocol || 'http').split(',')[0].trim();
-    const hostname = host.split(':')[0];
-
-    if (host && !isLocalHost(hostname)) {
-        return `${proto}://${host}`.replace(/\/$/, '');
+function getFrontendUrl() {
+    const url = process.env.FRONTEND_URL?.trim();
+    if (url) {
+        return normalizeUrl(url);
     }
 
-    return getEnvFrontendUrl() || 'http://localhost:5173';
+    if (process.env.NODE_ENV === 'production') {
+        throw new Error(
+            'FRONTEND_URL is not set. Add it to server/.env and restart PM2.'
+        );
+    }
+
+    return DEV_FALLBACK;
 }
 
 module.exports = { getFrontendUrl };

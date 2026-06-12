@@ -16,7 +16,7 @@ exports.uploadFile = async (req, res) => {
         const publicId = crypto.randomBytes(8).toString('hex'); // Short random ID
 
         // Point QR code at the public view page on the live site
-        const frontendUrl = getFrontendUrl(req);
+        const frontendUrl = getFrontendUrl();
         const publicUrl = `${frontendUrl}/v/${publicId}`;
 
         const qrFileName = `qr-${publicId}.png`;

@@ -44,6 +44,10 @@ const startServer = async () => {
         console.log('Database connected...');
         // Sync models (force: false to avoid dropping tables)
         await sequelize.sync({ alter: true });
+        const publicSiteUrl = process.env.FRONTEND_URL?.trim()
+            ? process.env.FRONTEND_URL.replace(/\/$/, '')
+            : 'http://localhost:5173 (dev — set FRONTEND_URL in .env for production)';
+        console.log(`Public site URL (QR codes): ${publicSiteUrl}`);
         app.listen(PORT, () => {
             console.log(`Server running on port ${PORT}`);
         });
