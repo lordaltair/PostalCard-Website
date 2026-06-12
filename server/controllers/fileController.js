@@ -3,6 +3,7 @@ const QRCode = require('qrcode');
 const path = require('path');
 const fs = require('fs');
 const crypto = require('crypto');
+const { getFrontendUrl } = require('../utils/frontendUrl');
 
 exports.uploadFile = async (req, res) => {
     try {
@@ -14,10 +15,8 @@ exports.uploadFile = async (req, res) => {
         const userId = req.user.id;
         const publicId = crypto.randomBytes(8).toString('hex'); // Short random ID
 
-        // Generate QR Code
-        // We'll point the QR code to the frontend public view page
-        // Use FRONTEND_URL from env or default to localhost
-        const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
+        // Point QR code at the public view page on the live site
+        const frontendUrl = getFrontendUrl(req);
         const publicUrl = `${frontendUrl}/v/${publicId}`;
 
         const qrFileName = `qr-${publicId}.png`;
