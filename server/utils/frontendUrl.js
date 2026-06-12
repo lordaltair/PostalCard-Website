@@ -14,14 +14,18 @@ function originFromHeader(value) {
     }
 }
 
+function getEnvFrontendUrl() {
+    const url = process.env.FRONTEND_URL?.trim();
+    return url ? url.replace(/\/$/, '') : null;
+}
+
 /**
  * Public site URL for QR codes and share links.
  * Priority: FRONTEND_URL env → Origin/Referer → proxy headers → dev fallback.
  */
 function getFrontendUrl(req) {
-    if (process.env.FRONTEND_URL) {
-        return process.env.FRONTEND_URL.replace(/\/$/, '');
-    }
+    const envUrl = getEnvFrontendUrl();
+    if (envUrl) return envUrl;
 
     const fromOrigin = originFromHeader(req.get('origin'));
     if (fromOrigin) return fromOrigin;
@@ -38,7 +42,7 @@ function getFrontendUrl(req) {
         return `${proto}://${host}`.replace(/\/$/, '');
     }
 
-    return 'http://localhost:5173';
+    return getEnvFrontendUrl() || 'http://localhost:5173';
 }
 
 module.exports = { getFrontendUrl };
